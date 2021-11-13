@@ -1,28 +1,15 @@
-const express = require('express')
-const app = express()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
+const express = require("express");
+const http = require("http");
+const socketIo = require("socket.io");
 
-app.get('/', (req, res) => {
-  res.send("Welcome")
-})
+const port = process.env.PORT || 4000;
 
+const app = express();
 
-io.on('connection', socket => {
-//   socket.on('join-room', (roomId, userId) => {
-//     socket.join(roomId)
-//     socket.to(roomId).broadcast.emit('user-connected', userId)
+const server = http.createServer(app);
 
-//     socket.on('disconnect', () => {
-//       socket.to(roomId).broadcast.emit('user-disconnected', userId)
-//     })
-//   })
+const io = socketIo(server);
 
-socket.on('message', ({name, message}) => {
-  io.emit('message', {name, message})
-})
-})
+io.on("connection", (socket) => {});
 
-http.listen(4000, ()=>{
-    console.log("Server started at 4000");
-});
+server.listen(port, () => console.log(`Listening on port ${port}`));
