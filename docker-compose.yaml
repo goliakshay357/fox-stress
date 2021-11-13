@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  # -------------------- CanvasBoard APIs Express Container -------------------- #
+
+  canvasboard-apis:
+    image: "fox-stress-backend"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fox-stress-backend
+    environment:
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    networks:
+      - docker_net
+    restart: unless-stopped
+
+networks:
+  docker_net:
+    driver: bridge
