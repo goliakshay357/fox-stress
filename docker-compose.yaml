@@ -16,8 +16,8 @@ services:
     networks:
       - docker_net
     volumes:
-      # - '/home/goli/Desktop/foss/fox-stress/backend:/app"
-      - "/c/Users/akash/Desktop/fox-stress/backend:/app"
+      - '/home/goli/Desktop/fox-stress/backend:/app'
+      # - "/c/Users/akash/Desktop/fox-stress/backend:/app"
 
     restart: unless-stopped
 

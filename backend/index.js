@@ -25,10 +25,10 @@ app.get('/', async (req, res) => {
   // nth line
   let line_reader = new linereader();
   console.log("Before line reader");
-  let n = await line_reader.line_reader();
-  console.log("After line reader");
+  let output = await line_reader.line_reader();
+  console.log("After line reader", typeof output);
   // let dataInJSON = txtToJSON({ data: shell });
-  res.json(await shell);
+  res.json(await output);
 
 })
 

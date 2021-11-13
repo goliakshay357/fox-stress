@@ -5,7 +5,7 @@ class Execution {
      execCmd(){
         // return exec('ab -c 50 -n 300 api.canvasboard.live/');
         return new Promise((done, failed) => {
-            exec('ab -c 50 -n 300 api.canvasboard.live/', (err, stdout, stderr) => {
+            exec('ab -c 50 -n 500 api.canvasboard.live/', (err, stdout, stderr) => {
                 if (err) {
                     err.stdout = stdout
                     err.stderr = stderr

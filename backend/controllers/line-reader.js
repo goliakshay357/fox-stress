@@ -56,28 +56,86 @@ class linereader {
                 
                 let array = line.split(' ');
                 if(count == 9){
-                    
                     obj["server_name"] = array[9];
                 }
 
                 if(count == 15){
-                    
                     obj["concurrency_level"] = parseInt(array[7]);
                 }
 
                 if(count == 16){
                     obj["time_taken_for_tests_in_secs"] = parseFloat(array[6]);
-                    
                 }
                 if(count == 17){
-                    obj["complete_requests"] = parseInt(array[7])
-                    console.log(obj);
+                    obj["completed_requests"] = parseInt(array[7])
+                }
+                if(count ==18){
+                    obj["failed_requests"] = parseInt(array[9])
+                }
+                if(count == 22){
+                    obj["req_per_sec_mean"] = parseFloat(array[6])
+                   
+                }
+                if(count ==23){
+                    obj["timewaiting_per_req_mean_ms"] = parseFloat(array[9])
+                    
+                }
+                if(count == 24){
+                    obj["time_per_req_mean_ms_concurr"] = parseFloat(array[9])
+                    
+                }
+                if(count == 25){
+                    obj["transfer_rate"] = parseFloat(array[11])
+                }
+                if(count == 29){
+                    
+                    let temp = {};
+                    temp["min"] = parseFloat(array[7]);
+                    temp["mean"] = parseFloat(array[10]);
+                    temp["sd"] = parseFloat(array[12]);
+                    temp["median"] = parseFloat(array[17]);
+                    temp["max"] = parseFloat(array[23]);
+
+                    obj["connect"] = temp;
+                }
+                if(count == 30){
+                    let temp = {};
+                    temp["min"] = parseFloat(array[4]);
+                    temp["mean"] = parseFloat(array[7]);
+                    temp["sd"] = parseFloat(array[9]);
+                    temp["median"] = parseFloat(array[14]);
+                    temp["max"] = parseFloat(array[20]);
+                    obj["processing"] = temp;
+                }
+                if(count == 31){
+                    let temp = {};
+                    temp["min"] = parseFloat(array[7]);
+                    temp["mean"] = parseFloat(array[10]);
+                    temp["sd"] = parseFloat(array[12]);
+                    temp["median"] = parseFloat(array[17]);
+                    temp["max"] = parseFloat(array[23]);
+                    
+                    obj["waiting"] = temp;          
+                }
+                if(count ==32){
+                    let temp = {};
+                    temp["min"] = parseFloat(array[7]);
+                    temp["mean"] = parseFloat(array[10]);
+                    temp["sd"] = parseFloat(array[12]);
+                    temp["median"] = parseFloat(array[17]);
+                    temp["max"] = parseFloat(array[23]);
+                    console.log(obj, array);
+                    obj["total"] = temp;
+                    
+
+                    done(obj);
+                    return                        
                 }
                 
               });
               
 
-              done("hello");
+              
         })
     }
 }
