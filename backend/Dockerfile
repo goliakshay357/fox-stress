@@ -4,10 +4,15 @@ WORKDIR /app
 
 EXPOSE 4000
 
+#install tini from tini github
+RUN apk add --no-cache tini
+
 COPY . .
 
 RUN npm install -g nodemon
 
 RUN npm install
 
-CMD ["node", "index.js"]
+ENTRYPOINT ["/sbin/tini", "--"]
+
+CMD ["nodemon", "index.js"]

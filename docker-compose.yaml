@@ -3,7 +3,7 @@ version: "3"
 services:
   # -------------------- CanvasBoard APIs Express Container -------------------- #
 
-  canvasboard-apis:
+  fox-stress:
     image: "fox-stress-backend"
     build:
       context: ./backend
@@ -15,6 +15,12 @@ services:
       - "4000:4000"
     networks:
       - docker_net
+    volumes:
+      # - type: bind
+      # - source: "/home/goli/Desktop/fox-stress/backend"
+      # - target: "/app"
+      - '/home/goli/Desktop/fox-stress/backend:/app'
+
     restart: unless-stopped
 
 networks:
