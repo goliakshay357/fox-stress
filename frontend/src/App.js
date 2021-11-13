@@ -1,29 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "http://127.0.0.1:4000";
 
-import io from 'socket.io-client';
-const socket = io.connect('http://localhost:4000');
+export default function ClientComponent() {
+  const [response, setResponse] = useState("");
 
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    socket.on("connection", (data) => {
+      console.log("cool");
+    });
+  }, []);
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <p>
+      It's <time dateTime={response}>{response}</time>
+    </p>
   );
 }
-
-export default App;
