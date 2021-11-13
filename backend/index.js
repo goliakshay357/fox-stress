@@ -1,18 +1,35 @@
+const { exec } = require('child_process');
 const express = require('express')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
-app.get('/', (req, res) => {
+const lineReader = require('line-reader');
+
+const txtToJSON = require("txt-file-to-json");
+
+const execution = require('./controllers/execution');
+const stringToFile = require("./controllers/string-to-file");
+const linereader = require("./controllers/line-reader");
+
+app.get('/', async (req, res) => {
+  let execObj = new execution();
+  console.log("Before");
+  let shell = await execObj.execCmd();
+  console.log("-------------------------------------------------------------------------------");
+  console.log("after");
   
-  // var exec = require('child_process').exec;
-  // var coffeeProcess = exec('ab -c 50 -n 3000 api.canvasboard.live/');
+  let file = new stringToFile()
+  let file_bool = await file.strint_to_file(shell);
 
-  // coffeeProcess.stdout.on('data', function(data) {
-  //     console.log(data); 
-  // });
+  // nth line
+  let line_reader = new linereader();
+  console.log("Before line reader");
+  let n = await line_reader.line_reader();
+  console.log("After line reader");
+  // let dataInJSON = txtToJSON({ data: shell });
+  res.json(await shell);
 
-  res.send("Welcome Akshay1111")
 })
 
 
